@@ -98,9 +98,15 @@ class DistributionPoseGenerator {
   ) {
     let count = 0;
     for (const poseJsonItem of poseJson.poses) {
-      const file = await poseFile
+      let file = await poseFile
         .file("frame-" + poseJsonItem.t + ".jpg")
         ?.async("uint8array");
+
+      if (!file) {
+        file = await poseFile
+          .file("snapshot-" + poseJsonItem.t + ".jpg")
+          ?.async("uint8array");
+      }
 
       if (!file) {
         continue;
