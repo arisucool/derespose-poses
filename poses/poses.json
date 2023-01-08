@@ -2,5 +2,21 @@
   "onegai-cinderella": {
     "title": "お願い！シンデレラ",
     "type": "song"
+  },
+  "star": {
+    "title": "Star!!",
+    "type": "song"
+  },
+  "smileing": {
+    "title": "S(mile)ING!",
+    "type": "song"
+  },
+  "never-say-never": {
+    "title": "Never say never",
+    "type": "song"
+  },
+  "mitsuboshi": {
+    "title": "ミツボシ",
+    "type": "song"
   }
 }
