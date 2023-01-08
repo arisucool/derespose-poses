@@ -4,6 +4,7 @@ export interface DistributionPoseJson
   extends Omit<PoseJson, "poses" | "poseLandmarkMapppings"> {
   poses: {
     t: number;
+    d: number;
     vectors: number[][];
   }[];
 }

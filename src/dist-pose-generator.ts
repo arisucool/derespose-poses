@@ -128,6 +128,7 @@ class DistributionPoseGenerator {
       poses: poseJson.poses.map((poseJsonItem: PoseJsonItem) => {
         return {
           t: poseJsonItem.t,
+          d: poseJsonItem.d,
           vectors: poseJsonItem.vectors,
         };
       }),
