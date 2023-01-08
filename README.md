@@ -1,11 +1,12 @@
-# derespose-poses
+# [derespose-poses](https://github.com/arisucool/derespose-poses)
 
-This repository stores pose datas used by [Derespose](https://github.com/arisucool/derespose).
+This repository stores pose dataset used by [Derespose](https://github.com/arisucool/derespose) for AR pose search.
 
 ## NOTICE
 
-The image files included in this repository were created by capturing screens with THE IDOLM@STER CINDERELLA GIRLS STARLIGHT STAGE app.
+We generated this pose dataset with using pose detection by machine learning, from the screen capture images.
 
-Therefore, the copyright of those images belongs to the developer of the app, BANDAI NAMCO Entertainment Inc.
+This repository also contains those screen capture images of THE IDOLM@STER CINDERELLA GIRLS STARLIGHT STAGE app.
+Therefore, the copyright of the images belongs to the developer of the app, BANDAI NAMCO Entertainment Inc.
 
 This repository and [Derespose](https://github.com/arisucool/derespose) are UNOFFICIAL project, and is maintained by individuals who are NOT RELATED with BANDAI NAMCO Entertainment Inc.

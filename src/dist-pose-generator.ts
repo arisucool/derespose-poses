@@ -10,7 +10,7 @@ interface PoseFileDefinition {
 }
 
 class DistributionPoseGenerator {
-  static readonly POSE_FILE_INDEX_PATH = `${__dirname}/../poses/index.json`;
+  static readonly POSE_FILE_INDEX_PATH = `${__dirname}/../poses/poses.json`;
   static readonly POSE_FILE_DIRECTORY_PATH = `${__dirname}/../poses/`;
   static readonly DISTRIBUTION_POSE_JSON_DIRECTORY_PATH = `${__dirname}/../dist/`;
 

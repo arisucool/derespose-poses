@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dist": "rimraf dist && mkdir -p dist && npm run dist:docs && npm run dist:poses",
     "dist:docs": "marked -o dist/index.html -i README.md",
-    "dist:poses": "cp poses/index.json dist/ && ts-node src/dist-pose-generator.ts"
+    "dist:poses": "cp poses/poses.json dist/ && ts-node src/dist-pose-generator.ts"
   },
   "dependencies": {
     "jszip": "^3.10.1",
