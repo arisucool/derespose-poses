@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  dist:
+    if: startsWith(github.ref, 'refs/heads/main')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+        env:
+          CI: true
+
+      - name: Generate distribution file
+        run: |
+          npm run dist
+
+      - name: Upload app to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
+        with:
+          branch: gh-pages
+          folder: dist/
