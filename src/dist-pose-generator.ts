@@ -1,15 +1,16 @@
 import * as fs from "fs/promises";
 import * as fs_ from "fs";
 import JSZip from "jszip";
-import { PoseJson, PoseJsonItem } from "ngx-mp-pose-extractor";
+import { PoseSetJson, PoseSetJsonItem } from "ngx-mp-pose-extractor";
 import { DistributionPoseJson } from "./interfaces/distribution-pose-json";
-import { ImageTrimmer } from "./image-trimmer";
-import { PoseFileDefinition } from "./interfaces/pose-file-definition";
+import { PoseSetsDefinition } from "./interfaces/pose-sets-definition";
 
 class DistributionPoseGenerator {
-  static readonly POSE_FILE_INDEX_PATH = `${__dirname}/../poses/poses.json`;
-  static readonly POSE_FILE_DIRECTORY_PATH = `${__dirname}/../poses/`;
-  static readonly DISTRIBUTION_POSE_JSON_DIRECTORY_PATH = `${__dirname}/../dist/`;
+  static readonly POSE_SET_DEFINITIONS_PATH = `${__dirname}/../pose-sets/pose-sets.json`;
+  static readonly POSE_SET_DIRECTORY_PATH = `${__dirname}/../pose-sets/`;
+  static readonly POSE_SET_ZIP_FILE_NAME_POSTFIX = `-poses.zip`;
+  static readonly POSE_SET_FRAME_IMAGE_EXTENSION = `.webp`;
+  static readonly DISTRIBUTION_POSE_SETS_DIRECTORY_PATH = `${__dirname}/../dist/`;
 
   constructor() {}
 
@@ -19,23 +20,23 @@ class DistributionPoseGenerator {
  Distribution Pose Generator for ${packageJson.name}
 --------------------------------------------------\n`);
 
-    const poseFileDefinitions =
-      require(DistributionPoseGenerator.POSE_FILE_INDEX_PATH) as {
-        [key: string]: PoseFileDefinition;
+    const poseSetDefinitions =
+      require(DistributionPoseGenerator.POSE_SET_DEFINITIONS_PATH) as {
+        [key: string]: PoseSetsDefinition;
       };
-    if (!poseFileDefinitions) {
-      console.error("Error: poseFileDefinitions is empty.");
+    if (!poseSetDefinitions) {
+      console.error("Error: poseSetDefinitions is empty.");
       return;
     }
 
     console.log(`* Processing...`);
-    const numOfPoseFiles = Object.keys(poseFileDefinitions).length;
+    const numOfPoseFiles = Object.keys(poseSetDefinitions).length;
     let count = 0;
-    for (const poseFileName of Object.keys(poseFileDefinitions)) {
+    for (const poseSetName of Object.keys(poseSetDefinitions)) {
       try {
         await this.processPoseFile(
-          poseFileName,
-          poseFileDefinitions[poseFileName]
+          poseSetName,
+          poseSetDefinitions[poseSetName]
         );
         count++;
       } catch (e: any) {
@@ -46,12 +47,12 @@ class DistributionPoseGenerator {
     console.log(`\n* Processed ${count} / ${numOfPoseFiles} pose files.\n`);
   }
 
-  async processPoseFile(poseFileName: string, definition: PoseFileDefinition) {
-    console.log(`\n  * ${poseFileName} (${definition.title})`);
+  async processPoseFile(poseSetName: string, definition: PoseSetsDefinition) {
+    console.log(`\n  * ${poseSetName} (${definition.title})`);
 
     if (
       fs_.existsSync(
-        `${DistributionPoseGenerator.DISTRIBUTION_POSE_JSON_DIRECTORY_PATH}/${poseFileName}`
+        `${DistributionPoseGenerator.DISTRIBUTION_POSE_SETS_DIRECTORY_PATH}/${poseSetName}`
       )
     ) {
       console.log(`    * Skip`);
@@ -62,34 +63,34 @@ class DistributionPoseGenerator {
     const jsZip = new JSZip();
     const zip = await jsZip.loadAsync(
       await fs.readFile(
-        `${DistributionPoseGenerator.POSE_FILE_DIRECTORY_PATH}/${poseFileName}.zip`
+        `${DistributionPoseGenerator.POSE_SET_DIRECTORY_PATH}/${poseSetName}${DistributionPoseGenerator.POSE_SET_ZIP_FILE_NAME_POSTFIX}`
       )
     );
-    const posesJsonRaw = await zip.file("poses.json")?.async("string");
-    if (!posesJsonRaw) {
+    const poseSetJsonString = await zip.file("poses.json")?.async("string");
+    if (!poseSetJsonString) {
       throw new Error("poses.json not found");
     }
 
-    const posesJson = JSON.parse(posesJsonRaw) as PoseJson;
+    const poseSetJson = JSON.parse(poseSetJsonString) as PoseSetJson;
 
-    console.log(`    * Generating shrink json...`);
+    console.log(`    * Generating shrinked json of poseset...`);
     await fs.mkdir(
-      `${DistributionPoseGenerator.DISTRIBUTION_POSE_JSON_DIRECTORY_PATH}/${poseFileName}`
+      `${DistributionPoseGenerator.DISTRIBUTION_POSE_SETS_DIRECTORY_PATH}/${poseSetName}`
     );
 
-    const shrinkedPoseJson = this.shrinkPosesJson(posesJson);
+    const shrinkedPoseJson = this.shrinkPosesJson(poseSetJson);
     await fs.writeFile(
-      `${DistributionPoseGenerator.DISTRIBUTION_POSE_JSON_DIRECTORY_PATH}/${poseFileName}/poses.json`,
+      `${DistributionPoseGenerator.DISTRIBUTION_POSE_SETS_DIRECTORY_PATH}/${poseSetName}/poses.json`,
       JSON.stringify(shrinkedPoseJson, null, 2)
     );
 
     console.log(`    * Saving frame images...`);
     const now = Date.now();
     let numOfSavedImages = 0;
-    for (const poseJsonItem of posesJson.poses) {
-      console.warn(`      * ${poseFileName}/frame-${poseJsonItem.t}.png`);
+    for (const poseJsonItem of poseSetJson.poses) {
+      console.log(`      * ${poseSetName}/frame-${poseJsonItem.t}.png`);
       try {
-        await this.savePoseImage(poseFileName, poseJsonItem, zip);
+        await this.savePoseImage(poseSetName, poseJsonItem, zip);
       } catch (e: any) {
         console.warn(`        * Error:`, e);
         continue;
@@ -105,16 +106,24 @@ class DistributionPoseGenerator {
 
   async savePoseImage(
     poseJsonName: string,
-    poseJsonItem: PoseJsonItem,
-    poseFile: JSZip
+    poseJsonItem: PoseSetJsonItem,
+    poseSetFile: JSZip
   ) {
-    let file: Buffer | undefined = await poseFile
-      .file("frame-" + poseJsonItem.t + ".jpg")
+    let file: Buffer | undefined = await poseSetFile
+      .file(
+        "frame-" +
+          poseJsonItem.t +
+          DistributionPoseGenerator.POSE_SET_FRAME_IMAGE_EXTENSION
+      )
       ?.async("nodebuffer");
 
     if (!file) {
-      file = await poseFile
-        .file("snapshot-" + poseJsonItem.t + ".jpg")
+      file = await poseSetFile
+        .file(
+          "snapshot-" +
+            poseJsonItem.t +
+            DistributionPoseGenerator.POSE_SET_FRAME_IMAGE_EXTENSION
+        )
         ?.async("nodebuffer");
     }
 
@@ -122,37 +131,22 @@ class DistributionPoseGenerator {
       throw new Error("frame image not found");
     }
 
-    // Trim the image
-    const imageTrimmer = new ImageTrimmer();
-    await imageTrimmer.loadByBuffer(file);
-    const marginColor = await imageTrimmer.getMarginColor();
-    if (marginColor == "#000000") {
-      await imageTrimmer.trimMargin(marginColor);
-      await imageTrimmer.resizeWithFit({
-        width: 800,
-      });
-      const f = await imageTrimmer.getBuffer("image/jpeg", 80);
-      if (f) {
-        file = f;
-      }
-    }
-
     // Save the file
     await fs.writeFile(
-      `${DistributionPoseGenerator.DISTRIBUTION_POSE_JSON_DIRECTORY_PATH}/${poseJsonName}/frame-${poseJsonItem.t}.jpg`,
+      `${DistributionPoseGenerator.DISTRIBUTION_POSE_SETS_DIRECTORY_PATH}/${poseJsonName}/frame-${poseJsonItem.t}${DistributionPoseGenerator.POSE_SET_FRAME_IMAGE_EXTENSION}`,
       file
     );
   }
 
-  shrinkPosesJson(poseJson: PoseJson): DistributionPoseJson {
+  shrinkPosesJson(poseJson: PoseSetJson): DistributionPoseJson {
     (poseJson as any).poseLandmarkMapppings = undefined;
     return {
       ...poseJson,
-      poses: poseJson.poses.map((poseJsonItem: PoseJsonItem) => {
+      poses: poseJson.poses.map((poseJsonItem: PoseSetJsonItem) => {
         return {
           t: poseJsonItem.t,
           d: poseJsonItem.d,
-          vectors: poseJsonItem.vectors,
+          v: poseJsonItem.v,
         };
       }),
     };

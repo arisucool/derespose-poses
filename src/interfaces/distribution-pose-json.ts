@@ -5,6 +5,6 @@ export interface DistributionPoseJson
   poses: {
     t: number;
     d: number;
-    vectors: number[][];
+    v: number[][];
   }[];
 }
