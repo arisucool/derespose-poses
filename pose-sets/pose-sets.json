@@ -16,7 +16,19 @@
     "type": "song"
   },
   "mitsuboshi": {
-    "title": "ミツボシ",
+    "title": "ミツボシ☆☆★",
+    "type": "song"
+  },
+  "onedari-shall-we": {
+    "title": "おねだり Shall we 〜？",
+    "type": "song"
+  },
+  "twilight-sky": {
+    "title": "Twilight Sky",
+    "type": "song"
+  },
+  "dokidoki-rhythm": {
+    "title": "DOKIDOKIリズム",
     "type": "song"
   }
 }
