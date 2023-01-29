@@ -1,13 +1,10 @@
 import * as fs from "fs/promises";
 import * as fs_ from "fs";
-import { PoseJson, PoseJsonItem } from "ngx-mp-pose-extractor";
-import { DistributionPoseJson } from "./distribution-pose-json";
 import JSZip from "jszip";
-
-interface PoseFileDefinition {
-  title: string;
-  type: "song" | "chanpoku";
-}
+import { PoseJson, PoseJsonItem } from "ngx-mp-pose-extractor";
+import { DistributionPoseJson } from "./interfaces/distribution-pose-json";
+import { ImageTrimmer } from "./image-trimmer";
+import { PoseFileDefinition } from "./interfaces/pose-file-definition";
 
 class DistributionPoseGenerator {
   static readonly POSE_FILE_INDEX_PATH = `${__dirname}/../poses/poses.json`;
@@ -87,38 +84,64 @@ class DistributionPoseGenerator {
     );
 
     console.log(`    * Saving frame images...`);
-    const numOfImages = await this.savePoseImages(poseFileName, posesJson, zip);
-    console.log(`    * Saved ${numOfImages} frame images`);
-  }
-
-  async savePoseImages(
-    poseJsonName: string,
-    poseJson: PoseJson,
-    poseFile: JSZip
-  ) {
-    let count = 0;
-    for (const poseJsonItem of poseJson.poses) {
-      let file = await poseFile
-        .file("frame-" + poseJsonItem.t + ".jpg")
-        ?.async("uint8array");
-
-      if (!file) {
-        file = await poseFile
-          .file("snapshot-" + poseJsonItem.t + ".jpg")
-          ?.async("uint8array");
-      }
-
-      if (!file) {
+    const now = Date.now();
+    let numOfSavedImages = 0;
+    for (const poseJsonItem of posesJson.poses) {
+      console.warn(`      * ${poseFileName}/frame-${poseJsonItem.t}.png`);
+      try {
+        await this.savePoseImage(poseFileName, poseJsonItem, zip);
+      } catch (e: any) {
+        console.warn(`        * Error:`, e);
         continue;
       }
-
-      await fs.writeFile(
-        `${DistributionPoseGenerator.DISTRIBUTION_POSE_JSON_DIRECTORY_PATH}/${poseJsonName}/frame-${poseJsonItem.t}.jpg`,
-        file
-      );
-      count++;
+      numOfSavedImages++;
     }
-    return count;
+    console.log(
+      `    * Saved ${numOfSavedImages} frame images (${Math.floor(
+        (Date.now() - now) / 1000
+      )}sec.)`
+    );
+  }
+
+  async savePoseImage(
+    poseJsonName: string,
+    poseJsonItem: PoseJsonItem,
+    poseFile: JSZip
+  ) {
+    let file: Buffer | undefined = await poseFile
+      .file("frame-" + poseJsonItem.t + ".jpg")
+      ?.async("nodebuffer");
+
+    if (!file) {
+      file = await poseFile
+        .file("snapshot-" + poseJsonItem.t + ".jpg")
+        ?.async("nodebuffer");
+    }
+
+    if (!file) {
+      throw new Error("frame image not found");
+    }
+
+    // Trim the image
+    const imageTrimmer = new ImageTrimmer();
+    await imageTrimmer.loadByBuffer(file);
+    const marginColor = await imageTrimmer.getMarginColor();
+    if (marginColor == "#000000") {
+      await imageTrimmer.trimMargin(marginColor);
+      await imageTrimmer.resizeWithFit({
+        width: 800,
+      });
+      const f = await imageTrimmer.getBuffer("image/jpeg", 80);
+      if (f) {
+        file = f;
+      }
+    }
+
+    // Save the file
+    await fs.writeFile(
+      `${DistributionPoseGenerator.DISTRIBUTION_POSE_JSON_DIRECTORY_PATH}/${poseJsonName}/frame-${poseJsonItem.t}.jpg`,
+      file
+    );
   }
 
   shrinkPosesJson(poseJson: PoseJson): DistributionPoseJson {
