@@ -58,5 +58,10 @@
     "title": "華蕾夢ミル狂詩曲～魂ノ導～",
     "type": "song",
     "orderInType": 10
+  },
+  "chocolate-tiara": {
+    "title": "ショコラ・ティアラ",
+    "type": "song",
+    "orderInType": 11
   }
 }
