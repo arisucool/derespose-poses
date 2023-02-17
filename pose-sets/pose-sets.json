@@ -1,42 +1,52 @@
 {
   "onegai-cinderella": {
     "title": "お願い！シンデレラ",
-    "type": "song"
+    "type": "song",
+    "orderInType": 0
   },
   "star": {
     "title": "Star!!",
-    "type": "song"
+    "type": "song",
+    "orderInType": 81
   },
   "smileing": {
     "title": "S(mile)ING!",
-    "type": "song"
+    "type": "song",
+    "orderInType": 1
   },
   "never-say-never": {
     "title": "Never say never",
-    "type": "song"
+    "type": "song",
+    "orderInType": 2
   },
   "mitsuboshi": {
     "title": "ミツボシ☆☆★",
-    "type": "song"
+    "type": "song",
+    "orderInType": 3
   },
   "onedari-shall-we": {
     "title": "おねだり Shall we 〜？",
-    "type": "song"
+    "type": "song",
+    "orderInType": 4
   },
   "twilight-sky": {
     "title": "Twilight Sky",
-    "type": "song"
+    "type": "song",
+    "orderInType": 5
   },
   "dokidoki-rhythm": {
     "title": "DOKIDOKIリズム",
-    "type": "song"
+    "type": "song",
+    "orderInType": 6
   },
   "kazeiro-melody": {
     "title": "風色メロディ",
-    "type": "song"
+    "type": "song",
+    "orderInType": 7
   },
   "marshmallow-kiss": {
     "title": "ましゅまろ☆キッス",
-    "type": "song"
+    "type": "song",
+    "orderInType": 8
   }
 }
