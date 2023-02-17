@@ -48,5 +48,10 @@
     "title": "ましゅまろ☆キッス",
     "type": "song",
     "orderInType": 8
+  },
+  "anzu-no-uta": {
+    "title": "あんずのうた",
+    "type": "song",
+    "orderInType": 9
   }
 }
