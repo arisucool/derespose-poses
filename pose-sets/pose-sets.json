@@ -53,5 +53,10 @@
     "title": "あんずのうた",
     "type": "song",
     "orderInType": 9
+  },
+  "tsubomi": {
+    "title": "華蕾夢ミル狂詩曲～魂ノ導～",
+    "type": "song",
+    "orderInType": 10
   }
 }
