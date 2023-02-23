@@ -147,6 +147,8 @@ class DistributionPoseGenerator {
           t: poseJsonItem.t,
           d: poseJsonItem.d,
           v: poseJsonItem.v,
+          h: poseJsonItem.h,
+          e: poseJsonItem.e,
         };
       }),
     };
