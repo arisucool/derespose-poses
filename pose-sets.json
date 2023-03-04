@@ -3,19 +3,19 @@
     "title": "お願い！シンデレラ",
     "type": "song",
     "orderInType": 0,
-    "version": 202302240100
+    "version": 202303050100
   },
   "star": {
     "title": "Star!!",
     "type": "song",
     "orderInType": 81,
-    "version": 202302240100
+    "version": 202303050100
   },
   "smileing": {
     "title": "S(mile)ING!",
     "type": "song",
     "orderInType": 1,
-    "version": 202302240100
+    "version": 202303050100
   },
   "never-say-never": {
     "title": "Never say never",
@@ -68,6 +68,7 @@
   "chocolate-tiara": {
     "title": "ショコラ・ティアラ",
     "type": "song",
-    "orderInType": 11
+    "orderInType": 11,
+    "version": 202302240100
   }
 }
