@@ -32,12 +32,14 @@
   "onedari-shall-we": {
     "title": "おねだり Shall we 〜？",
     "type": "song",
-    "orderInType": 4
+    "orderInType": 4,
+    "version": 202303110300
   },
   "twilight-sky": {
     "title": "Twilight Sky",
     "type": "song",
-    "orderInType": 5
+    "orderInType": 5,
+    "version": 202303110300
   },
   "dokidoki-rhythm": {
     "title": "DOKIDOKIリズム",
