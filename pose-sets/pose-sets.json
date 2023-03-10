@@ -3,37 +3,36 @@
     "title": "お願い！シンデレラ",
     "type": "song",
     "orderInType": 0,
-    "version": 202303050100
+    "version": 202303110300
   },
   "star": {
     "title": "Star!!",
     "type": "song",
     "orderInType": 81,
-    "version": 202303050100
+    "version": 202303110300
   },
   "smileing": {
     "title": "S(mile)ING!",
     "type": "song",
     "orderInType": 1,
-    "version": 202303050100
+    "version": 202303110300
   },
   "never-say-never": {
     "title": "Never say never",
     "type": "song",
     "orderInType": 2,
-    "version": 202302240100
+    "version": 202303110300
   },
   "mitsuboshi": {
     "title": "ミツボシ☆☆★",
     "type": "song",
     "orderInType": 3,
-    "version": 202302240100
+    "version": 202303110300
   },
   "onedari-shall-we": {
     "title": "おねだり Shall we 〜？",
     "type": "song",
-    "orderInType": 4,
-    "version": 202302240100
+    "orderInType": 4
   },
   "twilight-sky": {
     "title": "Twilight Sky",
@@ -69,6 +68,6 @@
     "title": "ショコラ・ティアラ",
     "type": "song",
     "orderInType": 11,
-    "version": 202302240100
+    "version": 202303110300
   }
 }
