@@ -1,9 +1,9 @@
 import * as fs from "fs/promises";
 import * as fs_ from "fs";
 import JSZip from "jszip";
-import { PoseSetJson, PoseSetJsonItem } from "ngx-mp-pose-extractor";
 import { DistributionPoseJson } from "./interfaces/distribution-pose-json";
 import { PoseSetsDefinition } from "./interfaces/pose-sets-definition";
+import { PoseSetJson, PoseSetJsonItem, PoseSet } from "ngx-mp-pose-extractor";
 
 class DistributionPoseGenerator {
   static readonly POSE_SET_DEFINITIONS_PATH = `${__dirname}/../pose-sets/pose-sets.json`;
@@ -109,22 +109,25 @@ class DistributionPoseGenerator {
     poseJsonItem: PoseSetJsonItem,
     poseSetFile: JSZip
   ) {
-    let file: Buffer | undefined = await poseSetFile
-      .file(
-        "frame-" +
-          poseJsonItem.t +
-          DistributionPoseGenerator.POSE_SET_FRAME_IMAGE_EXTENSION
-      )
-      ?.async("nodebuffer");
+    let file: Buffer | undefined;
 
-    if (!file) {
+    if (poseJsonItem.id) {
       file = await poseSetFile
         .file(
-          "snapshot-" +
+          "frame-" +
+            poseJsonItem.id +
+            DistributionPoseGenerator.POSE_SET_FRAME_IMAGE_EXTENSION
+        )
+        ?.async("nodebuffer");
+    } else {
+      file = await poseSetFile
+        .file(
+          "frame-" +
             poseJsonItem.t +
             DistributionPoseGenerator.POSE_SET_FRAME_IMAGE_EXTENSION
         )
         ?.async("nodebuffer");
+      poseJsonItem.id = this.getIdByTimeMiliseconds(poseJsonItem.t);
     }
 
     if (!file) {
@@ -133,9 +136,13 @@ class DistributionPoseGenerator {
 
     // Save the file
     await fs.writeFile(
-      `${DistributionPoseGenerator.DISTRIBUTION_POSE_SETS_DIRECTORY_PATH}/${poseJsonName}/frame-${poseJsonItem.t}${DistributionPoseGenerator.POSE_SET_FRAME_IMAGE_EXTENSION}`,
+      `${DistributionPoseGenerator.DISTRIBUTION_POSE_SETS_DIRECTORY_PATH}/${poseJsonName}/frame-${poseJsonItem.id}${DistributionPoseGenerator.POSE_SET_FRAME_IMAGE_EXTENSION}`,
       file
     );
+  }
+
+  getIdByTimeMiliseconds(timeMiliseconds: number) {
+    return Math.floor(timeMiliseconds / 100) * 100;
   }
 
   shrinkPosesJson(poseJson: PoseSetJson): DistributionPoseJson {
@@ -144,11 +151,14 @@ class DistributionPoseGenerator {
       ...poseJson,
       poses: poseJson.poses.map((poseJsonItem: PoseSetJsonItem) => {
         return {
+          id: poseJsonItem.id ?? this.getIdByTimeMiliseconds(poseJsonItem.t),
           t: poseJsonItem.t,
           d: poseJsonItem.d,
           v: poseJsonItem.v,
           h: poseJsonItem.h,
           e: poseJsonItem.e,
+          mt: poseJsonItem.mt,
+          md: poseJsonItem.md,
         };
       }),
     };
