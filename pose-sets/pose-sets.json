@@ -112,5 +112,23 @@
     "type": "song",
     "orderInType": 17,
     "version": 202303160000
+  },
+  "apple-pie-princess": {
+    "title": "アップルパイ・プリンセス",
+    "type": "song",
+    "orderInType": 18,
+    "version": 202303160000
+  },
+  "everyday-dream": {
+    "title": "エヴリデイドリーム",
+    "type": "song",
+    "orderInType": 19,
+    "version": 202303160000
+  },
+  "bright-blue": {
+    "title": "Bright Blue",
+    "type": "song",
+    "orderInType": 20,
+    "version": 202303160000
   }
 }
