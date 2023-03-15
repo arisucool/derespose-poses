@@ -8,7 +8,7 @@ import { PoseSetJson, PoseSetJsonItem, PoseSet } from "ngx-mp-pose-extractor";
 class DistributionPoseGenerator {
   static readonly POSE_SET_DEFINITIONS_PATH = `${__dirname}/../pose-sets/pose-sets.json`;
   static readonly POSE_SET_DIRECTORY_PATH = `${__dirname}/../pose-sets/`;
-  static readonly POSE_SET_ZIP_FILE_NAME_POSTFIX = `-poses.zip`;
+  static readonly POSE_SET_ZIP_FILE_NAME_POSTFIX = `.poses.zip`;
   static readonly POSE_SET_FRAME_IMAGE_EXTENSION = `.webp`;
   static readonly DISTRIBUTION_POSE_SETS_DIRECTORY_PATH = `${__dirname}/../dist/`;
 
