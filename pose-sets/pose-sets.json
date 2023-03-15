@@ -76,5 +76,23 @@
     "type": "song",
     "orderInType": 11,
     "version": 202303110300
+  },
+  "venus-syndrome": {
+    "title": "ヴィーナスシンドローム",
+    "type": "song",
+    "orderInType": 12,
+    "version": 202303110300
+  },
+  "romantic-now": {
+    "title": "Romantic Now",
+    "type": "song",
+    "orderInType": 13,
+    "version": 202303110300
+  },
+  "you-re-stars-shine-on-me": {
+    "title": "You’re stars shine on me",
+    "type": "song",
+    "orderInType": 14,
+    "version": 202303110300
   }
 }
