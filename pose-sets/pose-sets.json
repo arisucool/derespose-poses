@@ -44,27 +44,32 @@
   "dokidoki-rhythm": {
     "title": "DOKIDOKIリズム",
     "type": "song",
-    "orderInType": 6
+    "orderInType": 6,
+    "version": 202303160100
   },
   "kazeiro-melody": {
     "title": "風色メロディ",
     "type": "song",
-    "orderInType": 7
+    "orderInType": 7,
+    "version": 202303160100
   },
   "marshmallow-kiss": {
     "title": "ましゅまろ☆キッス",
     "type": "song",
-    "orderInType": 8
+    "orderInType": 8,
+    "version": 202303160100
   },
   "anzu-no-uta": {
     "title": "あんずのうた",
     "type": "song",
-    "orderInType": 9
+    "orderInType": 9,
+    "version": 202303160100
   },
   "tsubomi": {
     "title": "華蕾夢ミル狂詩曲～魂ノ導～",
     "type": "song",
-    "orderInType": 10
+    "orderInType": 10,
+    "version": 202303160100
   },
   "chocolate-tiara": {
     "title": "ショコラ・ティアラ",
