@@ -202,5 +202,23 @@
     "type": "song",
     "orderInType": 32,
     "version": 202303210000
+  },
+  "koiiro-energy": {
+    "title": "恋色エナジー",
+    "type": "song",
+    "orderInType": 34,
+    "version": 202303210000
+  },
+  "kimochi-iiyone-ittosho": {
+    "title": "気持ちいいよね 一等賞!",
+    "type": "song",
+    "orderInType": 36,
+    "version": 202303210000
+  },
+  "la-vie-en-rose": {
+    "title": "ラヴィアンローズ",
+    "type": "song",
+    "orderInType": 37,
+    "version": 202303210000
   }
 }
