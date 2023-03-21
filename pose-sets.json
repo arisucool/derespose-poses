@@ -130,5 +130,23 @@
     "type": "song",
     "orderInType": 20,
     "version": 202303160000
+  },
+  "rockin-emotion": {
+    "title": "Rockin’ Emotion",
+    "type": "song",
+    "orderInType": 21,
+    "version": 202303210000
+  },
+  "hanakanzashi": {
+    "title": "花簪 HANAKANZASHI",
+    "type": "song",
+    "orderInType": 22,
+    "version": 202303210000
+  },
+  "hotel-moonside": {
+    "title": "Hotel Moonside",
+    "type": "song",
+    "orderInType": 23,
+    "version": 202303210000
   }
 }
