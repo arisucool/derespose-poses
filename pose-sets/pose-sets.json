@@ -166,5 +166,23 @@
     "type": "song",
     "orderInType": 26,
     "version": 202303210000
+  },
+  "nekketsu-otome-a": {
+    "title": "熱血乙女A",
+    "type": "song",
+    "orderInType": 27,
+    "version": 202303210000
+  },
+  "kimagure-cafe-au-lait": {
+    "title": "き・ま・ぐ・れ☆Cafe au lait !",
+    "type": "song",
+    "orderInType": 28,
+    "version": 202303210000
+  },
+  "hakka": {
+    "title": "薄荷 -ハッカ-",
+    "type": "song",
+    "orderInType": 29,
+    "version": 202303210000
   }
 }
