@@ -220,5 +220,23 @@
     "type": "song",
     "orderInType": 37,
     "version": 202303210000
+  },
+  "in-fact": {
+    "title": "in fact",
+    "type": "song",
+    "orderInType": 38,
+    "version": 202303210000
+  },
+  "miracle-telepathy": {
+    "title": "ミラクルテレパシー",
+    "type": "song",
+    "orderInType": 39,
+    "version": 202303210000
+  },
+  "koi-no-hamburg": {
+    "title": "恋のHamburg♪",
+    "type": "song",
+    "orderInType": 40,
+    "version": 202303210000
   }
 }
