@@ -185,12 +185,6 @@
     "orderInType": 29,
     "version": 202303210000
   },
-  "doku-kinoko-densetsu": {
-    "title": "毒茸伝説",
-    "type": "song",
-    "orderInType": 30,
-    "version": 202303210000
-  },
   "himitsu-no-toilette": {
     "title": "秘密のトワレ",
     "type": "song",
@@ -237,6 +231,24 @@
     "title": "恋のHamburg♪",
     "type": "song",
     "orderInType": 40,
+    "version": 202303210000
+  },
+  "radio-happy": {
+    "title": "Radio Happy",
+    "type": "song",
+    "orderInType": 42,
+    "version": 202303210000
+  },
+  "to-my-darling": {
+    "title": "To my darling...",
+    "type": "song",
+    "orderInType": 43,
+    "version": 202303210000
+  },
+  "minna-no-kimochi": {
+    "title": "みんなのきもち",
+    "type": "song",
+    "orderInType": 44,
     "version": 202303210000
   }
 }
