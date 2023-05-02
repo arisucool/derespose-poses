@@ -286,5 +286,23 @@
     "type": "song",
     "orderInType": 50,
     "version": 202303210000
+  },
+  "last-kiss": {
+    "title": "Last Kiss",
+    "type": "song",
+    "orderInType": 51,
+    "version": 202303210000
+  },
+  "tani-no-soko-de-saku-hanaha": {
+    "title": "谷の底で咲く花は",
+    "type": "song",
+    "orderInType": 53,
+    "version": 202303210000
+  },
+  "hono-no-hana": {
+    "title": "炎の華",
+    "type": "song",
+    "orderInType": 54,
+    "version": 202303210000
   }
 }
