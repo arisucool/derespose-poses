@@ -232,5 +232,23 @@
     "type": "song",
     "orderInType": 40,
     "version": 202303210000
+  },
+  "radio-happy": {
+    "title": "Radio Happy",
+    "type": "song",
+    "orderInType": 42,
+    "version": 202303210000
+  },
+  "to-my-darling": {
+    "title": "To my darling...",
+    "type": "song",
+    "orderInType": 43,
+    "version": 202303210000
+  },
+  "minna-no-kimochi": {
+    "title": "みんなのきもち",
+    "type": "song",
+    "orderInType": 44,
+    "version": 202303210000
   }
 }
