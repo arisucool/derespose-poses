@@ -304,5 +304,23 @@
     "type": "song",
     "orderInType": 54,
     "version": 202303210000
+  },
+  "love-hazukamu": {
+    "title": "LOVE☆ハズカム",
+    "type": "song",
+    "orderInType": 55,
+    "version": 202303210000
+  },
+  "syuga-hato-revolution": {
+    "title": "しゅがーはぁと☆レボリューション",
+    "type": "song",
+    "orderInType": 56,
+    "version": 202303210000
+  },
+  "mori-no-kuni-kara": {
+    "title": "もりのくにから",
+    "type": "song",
+    "orderInType": 57,
+    "version": 202303210000
   }
 }
