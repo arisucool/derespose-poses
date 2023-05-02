@@ -268,5 +268,23 @@
     "type": "song",
     "orderInType": 47,
     "version": 202303210000
+  },
+  "one-life": {
+    "title": "One Life",
+    "type": "song",
+    "orderInType": 48,
+    "version": 202303210000
+  },
+  "inori-no-hana": {
+    "title": "祈りの花",
+    "type": "song",
+    "orderInType": 49,
+    "version": 202303210000
+  },
+  "rakuen": {
+    "title": "楽園",
+    "type": "song",
+    "orderInType": 50,
+    "version": 202303210000
   }
 }
