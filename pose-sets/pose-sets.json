@@ -250,5 +250,23 @@
     "type": "song",
     "orderInType": 44,
     "version": 202303210000
+  },
+  "koikaze": {
+    "title": "こいかぜ",
+    "type": "song",
+    "orderInType": 45,
+    "version": 202303210000
+  },
+  "lilac-time": {
+    "title": "lilac time",
+    "type": "song",
+    "orderInType": 46,
+    "version": 202303210000
+  },
+  "oikaze-running": {
+    "title": "追い風Running",
+    "type": "song",
+    "orderInType": 47,
+    "version": 202303210000
   }
 }
